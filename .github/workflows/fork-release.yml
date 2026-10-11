@@ -1,0 +1,91 @@
+name: Android Release (Fork)
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Semantic version without the v prefix, for example 1.2.3
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: fork-release-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  RELEASE_TAG: ${{ github.event_name == 'workflow_dispatch' && format('v{0}', inputs.version) || github.ref_name }}
+  BUILD_NUMBER: ${{ github.run_number }}
+  ANDROID_RELEASE_KEYSTORE_BASE64: ${{ secrets.ANDROID_RELEASE_KEYSTORE_BASE64 }}
+  ANDROID_RELEASE_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_RELEASE_KEYSTORE_PASSWORD }}
+  ANDROID_RELEASE_KEY_ALIAS: ${{ secrets.ANDROID_RELEASE_KEY_ALIAS }}
+  ANDROID_RELEASE_KEY_PASSWORD: ${{ secrets.ANDROID_RELEASE_KEY_PASSWORD }}
+
+jobs:
+  release:
+    name: Build and Publish Release APK/AAB
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Set up JDK
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v4
+        with:
+          packages: platform-tools
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
+
+      - name: Validate release tag
+        run: |
+          TAG="$RELEASE_TAG" GITHUB_REF_NAME="$RELEASE_TAG" make validate-semver-tag
+
+      - name: Install signing keystore
+        run: make install-android-release-keystore
+
+      - name: Prepare release version and build metadata
+        run: |
+          TAG="$RELEASE_TAG" GITHUB_REF_NAME="$RELEASE_TAG" make prepare-android-release-version
+
+      - name: Build signed release APK and AAB
+        run: make android-release-artifacts
+
+      - name: Verify release artifacts
+        run: make verify-android-release-artifacts
+
+      - name: Upload release artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: Consolation-${{ env.RELEASE_TAG }}-release
+          path: |
+            dist/release/Consolation-*-android.apk
+            dist/release/Consolation-*-android.aab
+          if-no-files-found: error
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v3
+        with:
+          tag_name: ${{ env.RELEASE_TAG }}
+          target_commitish: ${{ github.sha }}
+          files: |
+            dist/release/Consolation-*-android.apk
+            dist/release/Consolation-*-android.aab
+          generate_release_notes: true
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

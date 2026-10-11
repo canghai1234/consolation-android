@@ -1,0 +1,129 @@
+<resources>
+    <string name="app_name">Consolation</string>
+    <string name="label_title">Consolation</string>
+    <string name="label_app_version">v%1$s</string>
+    <string name="label_subtitle">从 SwiftUI 初步移植而来，支持 USB 设备发现和仅观看控制。</string>
+    <string name="label_device">设备</string>
+    <string name="label_resolution">分辨率和帧率</string>
+    <string name="hint_select_resolution">点击选择分辨率、帧率和像素格式</string>
+    <string name="menu_other_resolutions_header">其他分辨率</string>
+    <string name="resolution_menu_resolution_header">分辨率</string>
+    <string name="resolution_menu_frame_rate_header">帧率</string>
+    <string name="resolution_menu_pixel_format_header">像素格式</string>
+    <string name="pixel_format_default_suffix">（默认）</string>
+    <string name="resolution_menu_fps_item">%1$d fps</string>
+    <string name="hint_select_device">选择已连接的 USB 采集设备</string>
+    <string name="hint_no_capture_devices">未找到设备。请连接采集卡。</string>
+    <string name="startup_permission_notice">你需要允许摄像头、麦克风和 USB 访问权限。这是因为 Android 会将采集卡识别为 USB 摄像头。</string>
+    <string name="startup_usb2_warning">当前设备正在使用 USB 2，这会严重限制性能。
+建议使用：1280x720 @ 60p 或 1920x1080 @ 30p。</string>
+    <string name="action_request_permission">请求 USB 权限</string>
+    <string name="action_start_video">播放</string>
+    <string name="action_stop_video">停止视频</string>
+    <string name="action_toggle_zoom_one_to_one">切换 1:1 像素缩放</string>
+    <string name="notice_zoom_one_to_one">1:1 缩放：现在每个视频像素对应屏幕上的一个像素。</string>
+    <string name="action_dump_usb_diagnostics">导出 USB 诊断信息（Logcat）</string>
+    <string name="action_settings">设置</string>
+    <string name="action_help">帮助</string>
+    <string name="action_about">关于</string>
+    <string name="action_capture_card_compatibility_warning">采集卡兼容性警告</string>
+    <string name="label_status">状态</string>
+    <string name="label_telemetry">性能数据</string>
+    <string name="state_idle">空闲</string>
+    <string name="state_requesting_permission">正在请求权限</string>
+    <string name="state_no_device">未连接设备</string>
+    <string name="state_checking_formats">正在检查可用分辨率……</string>
+    <string name="state_no_formats">此设备未报告分辨率</string>
+    <string name="state_probe_unavailable">格式不可用（设备忙，请重新插拔）</string>
+    <string name="state_ready">就绪</string>
+    <string name="state_running">运行中</string>
+    <string name="state_failed">失败：%1$s</string>
+    <string name="error_dialog_title">视频采集错误</string>
+    <string name="connecting_capture_card">正在连接采集卡……</string>
+    <string name="telemetry_format">%1$dx%2$d/%3$d | %4$s | %5$dfps | 丢帧：%6$d | 队列：%7$.0f | 延迟：%8$.0fms | 大小：%9$s</string>
+    <string name="low_fps_warning">检测到低帧率。点击查看详情。</string>
+    <string name="low_fps_info_title">低帧率警告</string>
+    <string name="low_fps_info_message">实际帧率低于请求值。这可能由 USB 带宽不足、系统负载过高或采集卡性能限制导致。请尝试降低分辨率或更换 USB 接口。</string>
+    <string name="compatibility_issue_title">采集卡兼容性</string>
+    <string name="compatibility_issue_intro">此采集卡存在已知兼容性问题。实际性能可能低于标称的分辨率或帧率。</string>
+    <string name="compatibility_issue_about_title">关于你的采集卡</string>
+    <string name="settings_show_stats">显示视频数据</string>
+    <string name="settings_low_fps_warnings">显示低帧率警告</string>
+    <string name="settings_show_debug_stats">显示高级视频数据</string>
+    <string name="settings_picture_in_picture">多任务时使用画中画</string>
+    <string name="settings_rotation">视频旋转</string>
+    <string name="settings_flip">视频翻转</string>
+    <string name="settings_title">设置</string>
+    <string name="settings_section_performance_telemetry">视频性能数据</string>
+    <string name="settings_section_video_transformation">视频变换</string>
+    <string name="settings_rotate_label">旋转</string>
+    <string name="settings_rotation_degrees">%1$d°</string>
+    <string name="settings_flip_label">翻转</string>
+    <string name="settings_flip_horizontal_short">水平</string>
+    <string name="settings_flip_vertical_short">垂直</string>
+    <string name="settings_stats_off">关闭</string>
+    <string name="settings_stats_bottom_left">左下角</string>
+    <string name="settings_stats_bottom_right">右下角</string>
+    <string name="settings_section_language">语言</string>
+    <string name="settings_language_label">应用语言</string>
+    <string name="settings_language_system">跟随系统</string>
+    <string name="settings_language_simplified_chinese">简体中文</string>
+    <string name="settings_language_hint">更改会立即生效；跟随系统会使用 Android 的语言设置。</string>
+    <string name="help_title">Consolation 帮助</string>
+    <string name="help_getting_started_title">开始使用</string>
+    <string name="help_getting_started_body">连接 USB 采集设备，从列表中选择它，然后点击播放。</string>
+    <string name="help_frame_rate_title">帧率</string>
+    <string name="help_frame_rate_body">为获得最佳效果，请选择与输入源相同的帧率。如果播放帧率低于预期，请避免使用 USB 集线器并更换质量较好的线缆。</string>
+    <string name="help_video_controls_title">视频控制</string>
+    <string name="help_video_controls_body">使用设置面板旋转或镜像画面，并显示性能数据。</string>
+    <string name="help_audio_controls_title">音频控制</string>
+    <string name="help_audio_controls_body">使用播放控制静音或调节音量。</string>
+    <string name="help_device_support_title">设备支持</string>
+    <string name="help_device_support_body">任何 USB Video Class（UVC）设备理论上都可以工作，但视频质量最终取决于采集设备硬件。有些设备标称的分辨率和帧率可能超出实际能力。</string>
+    <string name="about_title">关于 Consolation</string>
+    <string name="about_header_title">Consolation™  v%1$s</string>
+    <string name="about_copyright">版权所有 © 2026 Centennial OSS Inc.</string>
+    <string name="about_trademark_body">Consolation 及其标志是 Centennial OSS Inc. 的商标。
+保留所有权利。</string>
+    <string name="about_utility_body">Consolation 是一款 USB 采集卡工具，可在 Android 平板上查看游戏主机、树莓派及其他 HDMI 设备的画面。</string>
+    <string name="about_uvc_required_body">需要外接 USB Video Class（UVC）采集硬件。</string>
+    <string name="about_privacy_body">Consolation 完全注重隐私，不会收集分析数据或窥探你的使用情况。任何内容都不会离开你的设备。</string>
+    <string name="about_open_source_body">本软件完全免费并开源，欢迎使用。</string>
+    <string name="about_privacy_policy_button">隐私政策</string>
+    <string name="about_github_button">GitHub</string>
+    <string name="about_build_info_label">构建信息（复制后用于支持）</string>
+    <string name="about_build_info_clip_label">Consolation 构建信息</string>
+    <string name="about_build_info_display">版本：%1$s（Android）
+构建类型：%2$s
+日期：%3$s
+提交：%4$s</string>
+    <string name="action_copy_to_clipboard">复制到剪贴板</string>
+    <string name="action_close">关闭</string>
+    <string name="action_refresh">刷新</string>
+    <string name="resolution_choice_format">%1$dx%2$d @ %3$dp  %4$s</string>
+    <string name="message_build_info_copied">构建信息已复制。</string>
+    <string name="message_select_device">请先选择采集设备。</string>
+    <string name="message_select_resolution">请先选择分辨率。</string>
+    <string name="message_permission_required">启动预览前需要 USB 权限。</string>
+    <string name="message_camera_permission_required_for_usb">在 Android 为视频类（UVC）设备显示 USB 访问提示之前，需要先授予摄像头权限。请授予权限后再次请求 USB 权限。</string>
+    <string name="message_record_audio_optional">麦克风权限被拒绝；视频仍可播放，但不会播放来自 HDMI/采集卡 USB 音频。</string>
+    <string name="message_runtime_perms_for_watch">USB 视频以及通过设备扬声器播放采集卡音频都需要摄像头和麦克风权限。</string>
+    <string name="message_permission_granted">USB 权限已授予。</string>
+    <string name="message_permission_denied">已拒绝所选设备的 USB 权限。</string>
+    <string name="message_permission_request_start_failed">无法启动 USB 权限请求。</string>
+    <string name="message_permission_request_timeout">USB 权限请求超时。</string>
+    <string name="message_usb_device_not_found">USB 设备未连接，或已不再匹配所选条目。</string>
+    <string name="message_uvc_open_failed">无法通过当前 USB 路径启动 UVC 预览。请尝试直接连接（不要使用集线器）、更换线缆或集线器，或者重新插拔采集设备。</string>
+    <string name="message_uvc_no_frames_after_start">未从采集卡收到视频帧。采集卡可能处于不支持的源模式，例如输入源输出与所选分辨率或帧率不匹配。请将输入源和所选模式设置为兼容组合后重试。
+
+要确认是否为输入源问题，请按以下步骤操作：
+ &#8227; 断开采集卡与 Android 设备的连接
+ &#8227; 断开采集卡上的 HDMI 线
+ &#8227; 保持 HDMI 线断开，重新连接采集卡
+ &#8227; 在 HDMI 线断开的情况下连接采集卡并点击播放
+ &#8227; 如果看到采集卡的黑屏、彩条或启动画面，说明输入源模式与所选采集卡模式不兼容。</string>
+    <string name="audio_playback_failed_title">音频播放失败</string>
+    <string name="audio_playback_failed_message">Android 无法为所选采集卡提供音频输入。当同时连接多个 USB 采集设备或 USB 音频设备时，可能会出现此问题。请断开多余的 USB 设备，然后停止并重新开始播放。</string>
+    <string name="message_usb_diag_logged">USB 诊断信息已写入 Logcat（标签：ConsolationUsbDiag）。过滤命令：adb logcat -s ConsolationUsbDiag:I</string>
+    <string name="message_capture_device_detached">采集设备已拔出。预览已停止。</string>
+</resources>

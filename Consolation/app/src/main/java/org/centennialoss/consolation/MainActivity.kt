@@ -24,6 +24,7 @@ import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.PopupMenu as AppCompatPopupMenu
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -95,6 +96,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
+import androidx.core.os.LocaleListCompat
 import androidx.core.view.doOnLayout
 import androidx.core.view.isVisible
 import androidx.core.view.WindowCompat
@@ -1650,6 +1652,15 @@ class MainActivity : ComponentActivity() {
             .apply()
     }
 
+    private fun setAppLanguage(languageTag: String?) {
+        val locales = if (languageTag.isNullOrBlank()) {
+            LocaleListCompat.getEmptyLocaleList()
+        } else {
+            LocaleListCompat.forLanguageTags(languageTag)
+        }
+        AppCompatDelegate.setApplicationLocales(locales)
+    }
+
     @Composable
     private fun MainScreen() {
         val baseScale = previewZoomScale()
@@ -2517,6 +2528,41 @@ class MainActivity : ComponentActivity() {
                 updatePipParams()
                 persistSettings()
             }
+            SectionTitle(getString(R.string.settings_section_language))
+            Text(
+                text = getString(R.string.settings_language_label),
+                color = Color.White,
+                fontSize = 15.sp,
+                fontWeight = FontWeight.Bold,
+            )
+            val selectedLanguageTag = AppCompatDelegate.getApplicationLocales().toLanguageTags()
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                InlineRadioOption(
+                    getString(R.string.settings_language_system),
+                    selectedLanguageTag.isBlank(),
+                    Modifier.padding(end = 28.dp),
+                ) {
+                    activeSheet = null
+                    setAppLanguage(null)
+                }
+                InlineRadioOption(
+                    getString(R.string.settings_language_simplified_chinese),
+                    selectedLanguageTag.equals("zh-CN", ignoreCase = true),
+                    Modifier.padding(end = 28.dp),
+                ) {
+                    activeSheet = null
+                    setAppLanguage("zh-CN")
+                }
+            }
+            Text(
+                text = getString(R.string.settings_language_hint),
+                color = Color(0x99FFFFFF),
+                fontSize = 12.sp,
+                modifier = Modifier.padding(top = 4.dp),
+            )
             DividerLine()
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 SmallPillButton(getString(R.string.action_help)) { activeSheet = ActiveSheet.HELP }
